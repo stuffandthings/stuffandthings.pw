@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="stuffandthings">
+    <meta name="description" content="Some stuff. Also some things. Stuffandthings.">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Projects &mdash; stuffandthings</title>
+
+    <link rel="me" href="mailto:omar@stuffandthings.pw" />
+    <link rel="pgpkey" href="./public.key" />
+
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/code.css">
+
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="./">stuffandthings</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="./archives.html">Archives</a></li>
+          <li><a href="./showcase.html">Showcase</a></li>
+          <li><a href="./projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <h2 id="projects">Projects</h2>
+<p>Here are some projects I’ve worked on. Feel free to contact me if any of them are of interest to you. You are free to reuse the code however you want.</p>
+<h3 id="line-server"><a href="https://github.com/stuffandthings/lineserver">Line Server</a></h3>
+<p>This program uses an apache tomcat server to serve some static text file over the web. The more interesting (though admittedly weak in implementation) aspect of this project is the file processor. The goal was to return a line in constant time. I did this by creating a separate index file that stores the start address of every line (first run iterates through the entire file, calculating the address of every start of a line, and stores this in a file). The Random Access File object in java allows you to jump to a specific section of a file without having to store the entire file in memory.</p>
+<h3 id="chat-server"><a href="https://github.com/stuffandthings/Chat">Chat Server</a></h3>
+<p>Simple chat server and client implemented in Python. The client consists of two components; the client view and the client interface. The client view is just simply a… well… view to see all messages from the chat server. The interface is what the user interacts with and all messages typed into the interface are sent to the server. As you can probably imagine, there’s a redundant connection here; there’s a connection for the interface and a connection for the view. This is just a simplification due to a time crunch. Dealing with stdin and stdout along with formatting in the command line wasn’t something I knew how to do. The two components can be unified with a simple GUI thrown on top.</p>
+<h3 id="good-python-guy"><a href="https://github.com/stuffandthings/Good-Python-Guy">Good Python, Guy!</a></h3>
+<p>Good Python, Guy! is a web front-end for GPG. It does not offer complete GPG functionality. What it does is provide a simple and easy way to send encrypted mail to a recipient. The user is required to have three things: the recipients e-mail, the recipients public key, and a message they wish to send to the recipient. The goal is to allow anyone with access to a web-browser to be able to send encrypted mail without the need to install and configure GPG. The source-code for our webapp is freely available here. You are free to use, modify, and distribute it however you want. We do ask that you give credit to us though (but we can’t and won’t force you to). We’re using the Python Flask microframework for our backend, Ember.js and Bootstrap for the frontend, and we’re powering everything on a Linode server.</p>
+<h3 id="hide-stuff-and-things-hsat"><a href="https://github.com/stuffandthings/HSAT">Hide Stuff And Things (HSAT)</a></h3>
+<p>From the Wikipedia page, Steganography “is the art or practice of concealing a message, image, or file within another message, image, or file.” Steganography has a pretty cool history. Read more about it here: http://en.wikipedia.org/wiki/Steganography HSAT is currently capable of hiding a string message in an image and also retrieving this message, given the modified image. The goal is to allow the user to take any image and any file, and be able to hide the file inside the image. The method splits up binary data and hides it in the least significant bits of each color value in each pixel of the image. The current implementation only allows for a text secret message to be hidden inside the image. There are complications with handling different file formats (e.g. troublesome to get a pdf file split into binary, hidden inside the image, and be able to extract the data from the image and convert it back into a pdf file).</p>
+<h3 id="hill-cipher-solver"><a href="https://github.com/stuffandthings/HillCipher">Hill Cipher Solver</a></h3>
+<p>Basic Hill Cipher decryptor I wrote for Ghost in the Shellcode 2015. To use, hardcode in the 3x3 matrix key in the python file. When it asks for the code, give it the entire ciphertext. The loop will run till the entire ciphertext is decrypted and congrats! You have successfully decrypted a hill cipher. The encryption process is similar, so given plaintext and an encryption key you will be able to encrypt as well. Please note, however, that this is not a strictly symmetric cryptographic algorithm. Whatever encryption key, it’s transposed matrix has to be invertible. The inverse of the transposed matrix of the 3x3 encryption matrix key is the decryption key. So a decryption key can be computed with the encryption key. You can read more about this in the link below. Read carefully, as there are some tricky modulo operations done at some steps. Look at http://crypto.interactive-maths.com/hill-cipher.html for description of how to encrypt and decrypt a hill cipher. There is a solver there, but it won’t let you input a 3x3 matrix as the key.</p>
+<h3 id="csv-reducer"><a href="https://github.com/stuffandthings/csv-reducer">CSV Reducer</a></h3>
+<p>Reduce a CSV dataset in python. This is not a generalized solution, I threw this together very quickly for a machine learning class. However you might find it helpful if you’re dealing with csv files, and you could reuse the code to throw something together real quick. (Though this is a terribly inefficient solution, I found it performed acceptably on ~15,000 line csv files).</p>
+<h3 id="battleship"><a href="https://github.com/stuffandthings/Battleship">Battleship</a></h3>
+<p>2-player Battleship board game in Python I wrote my freshman year of college. To run, simply run battleship.py with ‘python battleship.py’ in the command line, or open battleship.py in IDLE and press F5 to run. The implementation is riddled with bugs, like off-by-one errors and incorrect placement issues. There is also no limit to the number of pegs a user can place. The game was made in a time crunch as my semester project for an introductory programming class, I never got around to fixing it.</p>
+
+    <footer>
+      <p>&copy; stuffandthings 2015.</p>
+      <p><a href="mailto:omar@stuffandthings.pw" rel="me">Email</a>. <a href="./public.key">GPG</a>.</p>
+    </footer>
+
+  </body>
+</html>

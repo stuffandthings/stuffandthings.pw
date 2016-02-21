@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="stuffandthings">
+    <meta name="description" content="Some stuff. Also some things. Stuffandthings.">
+    <meta name="viewport" content="width=device-width">
+
+    <title>New blog with Hakyll &mdash; stuffandthings</title>
+
+    <link rel="me" href="mailto:omar@stuffandthings.pw" />
+    <link rel="pgpkey" href="../public.key" />
+
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/code.css">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="../">stuffandthings</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="../archives.html">Archives</a></li>
+          <li><a href="../showcase.html">Showcase</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <article>
+  <header>
+    <h2><a href="../posts/hakyll.html">New blog with Hakyll</a></h2>
+  </header>
+
+  <footer>
+    <p>Posted on <time datetime="2015-09-20T11:09:59+0000">September 20, 2015</time>.</p>
+  </footer>
+
+  <p>Just set up my new blog using <a href="http://jaspervdj.be/hakyll/">Hakyll</a>. I used <a href="https://jekyllrb.com/">Jekyll</a> for a while, and then <a href="http://blog.getpelican.com/">Pelican</a>. I haven’t put much work into maintaining my blog so I decided to redo it and use Hakyll (I’ve been meaning to learn <a href="https://www.haskell.org/">Haskell</a>, so this just came up as a project). Not going to make any comparisons with Jakyll or Pelican (they’re both just as easy to use and nice), but the main static webpage generator logic happens in Haskell and I’ve liked functional programming since I used SML in school.</p>
+<p>There is tons of source code people have put up, and you can get up and running very quickly. Just clone the repo and run some commands.</p>
+<p><em>NOTE: I’m using OS X here, and deploying the blog to a Linode server running Arch Linux, with nginx as the server</em></p>
+<h4 id="installation">Installation:</h4>
+<p>You need some haskell stuff on your system first. It’ll take a while to build etc. so be patient after the first command.</p>
+<pre><code>brew install ghc cabal-install
+cabal update
+cabal install -j hakyll</code></pre>
+<h4 id="setup">Setup:</h4>
+<p>Next you need to either get started from scratch (which can take some time, especially if you’re new to haskell), or you can just clone an existing project and work from there.</p>
+<pre><code>git clone https://www.github.com/&lt;PERSON&gt;/&lt;PROJECT&gt;
+cd &lt;PROJECT&gt;
+ghc --make site.hs
+./site rebuild</code></pre>
+<p>To test locally you can run a small web server,</p>
+<pre><code>./site watch</code></pre>
+<p>Navigate to <code>http://localhost:8000</code> and you’ve got your static blog. Easy, right?</p>
+<p>The really cool thing I found people doing was having a built in deploy command that allows you to make changes locally and easily push them to a remote server. I have an alias:</p>
+<pre><code>alias hakyll='ghc --make site.hs &amp;&amp; ./site rebuild &amp;&amp; ./site deploy'</code></pre>
+<p>You don’t have to run the <code>ghc --make site.hs</code> command unless you’ve made changes to the haskell source file.</p>
+<p>Here’s what the deploy function looks like (it’s just rsync’ing to your remote server):</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">hakyllConfig ::</span> <span class="dt">Configuration</span>
+hakyllConfig <span class="fu">=</span> defaultConfiguration
+    { deployCommand   <span class="fu">=</span> <span class="st">&quot;rsync -avzc -e 'ssh -p 12345' _site/ username@example.com:/usr/share/nginx/example.com&quot;</span> }</code></pre></div>
+<p>Write a new post, run <code>hakyll</code> and my blog updates automagically.</p>
+<p>You can integrate the blog environment into a git repository and have a cronjob on your remote server that pulls the changes. You can also have your remote server do the work with haskell if you don’t want to install it locally, although cabal failed with less than 2 GB of memory so keep that in mind. You can setup a swap drive etc to avoid that.</p>
+</article>
+
+
+    <footer>
+      <p>&copy; stuffandthings 2015.</p>
+      <p><a href="mailto:omar@stuffandthings.pw" rel="me">Email</a>. <a href="../public.key">GPG</a>.</p>
+    </footer>
+
+  </body>
+</html>

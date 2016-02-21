@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="stuffandthings">
+    <meta name="description" content="Some stuff. Also some things. Stuffandthings.">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Exploring Crypto &mdash; stuffandthings</title>
+
+    <link rel="me" href="mailto:omar@stuffandthings.pw" />
+    <link rel="pgpkey" href="../public.key" />
+
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/code.css">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="../">stuffandthings</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="../archives.html">Archives</a></li>
+          <li><a href="../showcase.html">Showcase</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <article>
+  <header>
+    <h2><a href="../posts/exploring-crypto.html">Exploring Crypto</a></h2>
+  </header>
+
+  <footer>
+    <p>Posted on <time datetime="2014-10-02T11:20:20+0000">October  2, 2014</time>.</p>
+  </footer>
+
+  <h4 id="introduction">Introduction</h4>
+<p>I outlined a time based crypto protocol in my first post, and the purpose of this post is to identify the reasons for a chosen algorithm, along with some analysis of it. I’ve been spending some of my free time reading up on crypto. The <a href="http://www.amazon.com/Crypto-Users-Handbook-Implementors-Cryptographic/dp/0444704841">Crypto User’s Handbook</a> is a short and concise read and does a great job introducing some more technical concepts of crypto, but lets be real so does wikipedia.</p>
+<h4 id="blowfish">Blowfish</h4>
+<p>The <a href="https://www.schneier.com/blowfish.html">Blowfish</a> encryption algorithm was developed by <a href="https://www.schneier.com/">Bruce Schneier</a> (well known figure in the security world, has tons of great essays on his site - highly recommended reads!) in 1993. It has gone through years of public scrutiny and cryptanalysis and still stands strong. Original paper available <a href="https://www.schneier.com/paper-blowfish-fse.html">here</a>.</p>
+<h4 id="why-blowfish">Why Blowfish?</h4>
+<p>I won’t try to convince anyone of Blowfish’s security, this is a well established view in the community. That being said, Blowfish is <a href="http://www.cse.wustl.edu/~jain/cse567-06/ftp/encryption_perf/">pretty</a> <a href="http://www.ijetae.com/files/Issue2/IJETAE_1211_02.pdf">fast</a> and this is relevant because the idea is, after all, a time-based crypto protocol. I guess the term time-based is kind of vague… essentially time is a key variable in this protocol. True name TBD.</p>
+<p>The idea is to encrypt ‘blocks’ of data, that aren’t too big and Blowfish is perfect for this, since it’s a block-cipher that uses 64-bit blocks. So say this protocol is encrypting some arbitrary packets of data, 64 bits is enough to have a timestamp header and some data. Blowfish is also a symmetric key algorithm (meaning the encryption and decryption keys are the same), which is important for the time-based protocol, since the assumption is that both parties will independently have the same key without it having to be explicitly shared.</p>
+<p>Key length is another important factor, and Blowfish uses a variable keylength between 32 and 448 bits. Best of all, Blowfish is not protected under any patents and can be used freely, as long as we all thank Mr. Schneier (Thanks Bruce! :D). All of this is just a bunch of handwaving, more details for anyone interested are in the original paper that I have linked in the introduction.</p>
+<h4 id="more-on-key-length">More on key length</h4>
+<p>In my first post I mentioned the sequential generated numbers being used as the encryption/decryption keys. While I’m sure keys of sufficient length can be generated (unlike 2-factor authentication tokens, which are usually 6 digits), another possibility is to use a mix of a constant and variable key. Since there is an initial exchange for the magic number (the input to the 2factor token generator), we can also have another key exchange.</p>
+<p>Say this key is of length n (lets call it N), and say our generated numbers are of length k (call it K). Our key N will be constant for every operation, but K will vary based on the time. The key we use to encrypt/decrpyt can be K appended onto N, which will be of length k+n, where 32 &lt;= (k+n) &lt;= 448. This is similar to how <a href="http://en.wikipedia.org/wiki/Salt_(cryptography)">salting</a> works.</p>
+<p>So each time our key is variable because of K, and N is used to make the key sufficiently large. This still ensures that both parties will, at any given point in time, have the exact same key without any need of constant key-exchanges, yet the key will still be ever-changing.</p>
+<p>Like I mentioned in my first post, we can exchange N using <a href="http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie-Hellman key exchange</a>, same with the magic number (initial input for 2factor token generator).</p>
+</article>
+
+
+    <footer>
+      <p>&copy; stuffandthings 2015.</p>
+      <p><a href="mailto:omar@stuffandthings.pw" rel="me">Email</a>. <a href="../public.key">GPG</a>.</p>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="stuffandthings">
+    <meta name="description" content="Some stuff. Also some things. Stuffandthings.">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Display files in browser as plaintext &mdash; stuffandthings</title>
+
+    <link rel="me" href="mailto:omar@stuffandthings.pw" />
+    <link rel="pgpkey" href="../public.key" />
+
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/code.css">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="../">stuffandthings</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="../archives.html">Archives</a></li>
+          <li><a href="../showcase.html">Showcase</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <article>
+  <header>
+    <h2><a href="../posts/files_as_plaintext.html">Display files in browser as plaintext</a></h2>
+  </header>
+
+  <footer>
+    <p>Posted on <time datetime="2015-09-20T11:12:40+0000">September 20, 2015</time>.</p>
+  </footer>
+
+  <p>I encountered a minor annoyance with adding my public key to the bottom of my blog. Instead of opening the text file in the browser, it would download it. This has something to do with a file called mime.types (/etc/nginx/mime.types) uses in the /etc/nginx/nginx.conf file. To configure your server to open a file in the browser instead of trying to download it, open up /etc/nginx/mime.types:</p>
+<pre><code>types {
+	text/html 		html htm shtml;
+	text/css 		css;
+	...
+	text/plain 		txt key;
+	...
+}</code></pre>
+<p>Since I was using a file called public.key, I just added the key extension to be read as a plaintext file. Reload nginx.conf and you’re all set!</p>
+</article>
+
+
+    <footer>
+      <p>&copy; stuffandthings 2015.</p>
+      <p><a href="mailto:omar@stuffandthings.pw" rel="me">Email</a>. <a href="../public.key">GPG</a>.</p>
+    </footer>
+
+  </body>
+</html>

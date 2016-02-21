@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="stuffandthings">
+    <meta name="description" content="Some stuff. Also some things. Stuffandthings.">
+    <meta name="viewport" content="width=device-width">
+
+    <title>BitTorrent Sync &mdash; stuffandthings</title>
+
+    <link rel="me" href="mailto:omar@stuffandthings.pw" />
+    <link rel="pgpkey" href="../public.key" />
+
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/code.css">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="../">stuffandthings</a></h1>
+
+      <nav>
+        <ul>
+          <li><a href="../archives.html">Archives</a></li>
+          <li><a href="../showcase.html">Showcase</a></li>
+          <li><a href="../projects.html">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <article>
+  <header>
+    <h2><a href="../posts/bittorrent_sync.html">BitTorrent Sync</a></h2>
+  </header>
+
+  <footer>
+    <p>Posted on <time datetime="2015-09-29T11:12:40+0000">September 29, 2015</time>.</p>
+  </footer>
+
+  <div class="figure">
+<img src="../resources/sync/sync_main.png" title="Shiny interface" alt="BitTorrent Sync main app on Mac OS X" />
+<p class="caption">BitTorrent Sync main app on Mac OS X</p>
+</div>
+<p>In the past I’ve relied pretty heavily on Dropbox despite not necessarily liking having no control over my data. I had a pretty large amount of storage from the college space-race Dropbox did a couple of years ago, but they pulled the extra space from that promotion and my account went back to pretty minimal storage space.</p>
+<p>I’ve been exploring other alternatives, primarily <a href="https://spideroak.com/">SpiderOak</a>. I’m not too keen on the design of the application though and the android version seems a bit buggy. I also found <a href="https://tresorit.com">Tresorit</a>, but that seems to be more of an enterprise tool and is pricier.</p>
+<p>I heard of BitTorrent <a href="https://www.getsync.com/">Sync</a> when it first came out but didn’t really give it a shot until now.</p>
+<p>Sync is awesome. It has a sleek interface on both desktop and mobile, a CLI that I have yet to use but which promises an even lazier workspace, no price tag (though for $39 you can get the pro version with some nicer features, still better than paying monthly), and most importantly puts you in control of your data. You can store whatever you want, and you can store as much of it as you want.</p>
+<div class="figure">
+<img src="../resources/sync/sync_availability.png" title="Available Platforms" alt="BitTorrent Sync is available on all major platforms" />
+<p class="caption">BitTorrent Sync is available on all major platforms</p>
+</div>
+<p>To reiterate why I’m liking sync so much; the authority on the data you store is you. How much you’re able to store depends on the system available to you. My desktop is usually always on, and so is my remote Linode server. I run Sync on my desktop and backup my mobile photo library to my desktop, and host a backup folder of important (lol) documents that is copied over to my laptop and mobile phone. Sync gets the data from peers, (in my case, my phone, laptop, desktop, and VPS are all peers) and as long as at least one peer is always on you can fetch the data to any other peer.</p>
+<div class="figure">
+<img src="../resources/sync/sync_peerlist.png" title="Sync Peers" alt="Peer List showing active peers and activity" />
+<p class="caption">Peer List showing active peers and activity</p>
+</div>
+<p>You can start a new folder anywhere and share it with yourself via e-mail, QR code for mobile, a link, or a key. Once another device tries to access and download the folder, the originating device gets a notification to allow/disallow access.</p>
+<p>An awesome use-case I’d like to start using would be to backup my blog to a sync folder and be able to pick up work on it on any device. I was going to use git, but I don’t really need version tracking for a personal blog.</p>
+<p>The only problem with Sync I’ve found so far is with its iOS app; it doesn’t sync in the background. Only when the app is open. That isn’t a huge issue, since if all you want is access to your files you can use an FTP client to get it from your desktop/remote server. The Android app however does background sync.</p>
+</article>
+
+
+    <footer>
+      <p>&copy; stuffandthings 2015.</p>
+      <p><a href="mailto:omar@stuffandthings.pw" rel="me">Email</a>. <a href="../public.key">GPG</a>.</p>
+    </footer>
+
+  </body>
+</html>
